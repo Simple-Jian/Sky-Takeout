@@ -76,12 +76,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         //拷贝实体对象,属性名相同则拷贝
         BeanUtils.copyProperties(employeeDTO, employee);
         //设置创建时间,默认状态等
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+       /* employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());*/
         employee.setStatus(StatusConstant.ENABLE);
         //TODO 设置创建人和修改人id 后期需要改为当前登录用户的ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+       /* employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());*/
         int r = employeeMapper.insert(employee);
         return r;
     }
@@ -109,8 +109,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee emp = new Employee();
         emp.setStatus(status);
         emp.setId(id);
-        emp.setUpdateTime(LocalDateTime.now());
-        emp.setUpdateUser(BaseContext.getCurrentId());
+        /*emp.setUpdateTime(LocalDateTime.now());
+        emp.setUpdateUser(BaseContext.getCurrentId());*/
         employeeMapper.updateEmp(emp);
     }
 
@@ -122,8 +122,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmp(Employee emp) {
-       emp.setUpdateTime(LocalDateTime.now());
-       emp.setUpdateUser(BaseContext.getCurrentId());
+       /*emp.setUpdateTime(LocalDateTime.now());
+       emp.setUpdateUser(BaseContext.getCurrentId());*/
        employeeMapper.updateEmp(emp);
     }
 
