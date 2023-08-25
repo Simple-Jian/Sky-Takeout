@@ -30,7 +30,7 @@
         delete from dish where id in
         <!--collection:遍历的集合 item:遍历的元素 separator:分隔符 open：遍历开始前
         拼接的SQL片段 close:遍历结束后拼接的SQL片段-->
-        <foreach collection="ids" item="id" separator="," open="(" close=")">
+        <foreach collection="id2" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </delete>
