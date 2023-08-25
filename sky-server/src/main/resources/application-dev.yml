@@ -6,3 +6,9 @@ sky:
     database: sky_take_out
     username: root
     password: 1234
+  #被引用的副配置文件
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tJfUgNu5EX8Qg19ePsS
+    access-key-secret: 2hHoAE1zy3Hjd1ZCaqYCkWab6kWozY
+    bucket-name: web-tlias-jian
