@@ -102,7 +102,7 @@ public class DishServiceImpl implements DishService {
         //如果菜品处于在售状态,则不能删除
         for (Long aLong : id2) {
             Dish dish=dishMapper.getById(aLong);
-            if(dish.getStatus()== StatusConstant.DISABLE)
+            if(dish.getStatus()== StatusConstant.ENABLE)
                 throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
         }
         //批量删除菜品
