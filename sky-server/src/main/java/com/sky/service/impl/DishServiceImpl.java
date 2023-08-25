@@ -113,10 +113,13 @@ public class DishServiceImpl implements DishService {
         //1.查询对应的套餐
         List<Long> list=setmealDishMapper.getIds(id2);
         HashSet<Long> list1=new HashSet<>(list); //去重
-        //2.删除对应的套餐
-        setmealMapper.deleteByDishIds(list1);
-        //3.删除对应的关联数据
-        setmealDishMapper.deleteBySetmealIds(list1);
+        System.out.println(list1);
+        //首先判断是否查出了数据
+        if(!list1.isEmpty()){ //2.删除对应的套餐
+            setmealMapper.deleteByDishIds(list1);
+            //3.删除对应的关联数据
+            setmealDishMapper.deleteBySetmealIds(list1);
+        }
     }
 
     @Override
