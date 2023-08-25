@@ -3,6 +3,8 @@ package com.sky.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.HashSet;
+
 @Mapper
 public interface SetmealMapper {
 
@@ -14,4 +16,9 @@ public interface SetmealMapper {
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
 
+    /**
+     * 根据菜品的id数组批量删除对应的套餐
+     * @param
+     */
+    void deleteByDishIds(HashSet<Long> hs);
 }
