@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class ShopController {
     @Autowired
     private RedisTemplate redisTemplate;
-    //设置一个店铺营业状态的常量
+    //定义一个店铺营业状态的常量
     public static final String STATUS="SHOP_STATUS";
 
     /**

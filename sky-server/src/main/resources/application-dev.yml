@@ -12,7 +12,10 @@ sky:
     port: 6379
     password: 123456
     database: 0       #指定使用哪个数据库,一般有16个,默认为0,这里使用db0,不同数据库之间完全隔离
-
+  #微信小程序相关配置信息
+  wechat:
+    appid: wxe7b01facce571ca4
+    secret: d6a4546c80eeafefb85e05bcdd0bf952
   #被引用的副配置文件
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com

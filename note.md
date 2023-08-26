@@ -203,5 +203,80 @@ public class RedisConfig {
             System.out.println(redisTemplate.delete("nameee"));
         }
 
-# 店铺营业状态设置
+# 店铺营业状态设置(Redis)
   由于店铺营业状态只有一个字段,因此存在redis中比较合适
+
+#HttpClient
+ HttpClient是Apache Jakarta Common下的子项目,可以用来提供高效的,最新的,功能丰富的支持HTTP协议的
+ 客户端编程工具包(即可以在java程序中发送http请求),并且它支持HTTP协议最新的版本和建议
+
+ 使用步骤:
+ 1.导入依赖,这个工具包被阿里云OSS依赖了,因此可以传递过来
+   <!--HttpClient工具包-->
+   <dependency>
+       <groupId>org.apache.httpcomponents</groupId>
+       <artifactId>httpclient</artifactId>
+   </dependency>
+
+ 2.核心API
+  HttpClient(接口)
+  HttpClients(相当于一个构建器,可以用来创建一个HttpClient对象)
+  CloseableHttpClient(实现了HttpClient接口)
+  HttpGet
+  HttpPost
+  使用:1 创建HttpClient对象 2 创建Http请求对象 3 调用HttpClient的execute方法发送请求
+   @Test
+      public void testGet() throws IOException {
+          //创建HttpClient接口实现类CloseableHttpClient对象
+          CloseableHttpClient httpClient=HttpClients.createDefault();
+          //创建请求对象
+          HttpGet httpGet = new HttpGet("http://localhost:8080/user/shop/status");
+          //发送请求,接收响应结果
+          CloseableHttpResponse res = httpClient.execute(httpGet);
+
+          //获取返回状态码
+          System.out.println(res.getStatusLine().getStatusCode());
+          HttpEntity entity = res.getEntity();   //响应体对象
+          //使用HttpClient的工具类解析响应体对象为字符串
+          System.out.println(EntityUtils.toString(entity));
+
+          //关闭资源
+          res.close();
+          httpClient.close();
+      }
+      @Test
+      public void testPost() throws IOException {
+          //创建HttpClient接口实现类CloseableHttpClient对象
+          CloseableHttpClient httpClient=HttpClients.createDefault();
+          //创建请求对象
+          HttpPost httpPost = new HttpPost("http://localhost:8080/admin/employee/login");
+          //封装响应体
+          //使用fastJSON创建一个Json对象
+          JSONObject jsonObject=new JSONObject();
+          jsonObject.put("username","admin");
+          jsonObject.put("password","123456");
+
+          StringEntity entity = new StringEntity(jsonObject.toString());
+          //指定请求的编码方式
+          entity.setContentEncoding("UTF-8");
+          //指定数据格式
+          entity.setContentType("application/json");
+          //设置响应体
+          httpPost.setEntity(entity);
+          //发送请求,接收响应结果
+          CloseableHttpResponse res = httpClient.execute(httpPost);
+
+          //获取返回状态码
+          System.out.println(res.getStatusLine().getStatusCode());
+          HttpEntity resEntity = res.getEntity();   //响应体对象
+          //使用HttpClient的工具类解析响应体对象为字符串
+          System.out.println("响应数据为:"+EntityUtils.toString(resEntity));
+
+          //关闭资源
+          res.close();
+          httpClient.close();
+      }
+
+
+
+
