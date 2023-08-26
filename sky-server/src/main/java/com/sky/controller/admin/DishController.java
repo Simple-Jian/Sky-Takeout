@@ -20,7 +20,7 @@ import static com.sky.result.Result.success;
 
 @Api(tags="菜品管理控制类")
 @Slf4j
-@RestController
+@RestController("adminDishController")
 @RequestMapping("/admin/dish")
 public class DishController {
     @Autowired
