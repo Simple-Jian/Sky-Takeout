@@ -14,11 +14,12 @@ import java.util.List;
 public interface SetmealDishMapper {
     /**
      * 根据菜品id的数组批量查询对应套餐的id
+     * 使用HashSet对查到的数据去重
      * @param id2
      * @return
      */
 
-    List<Long> getIds(Long []id2);
+    HashSet<Long> getIds(Long []id2);
 
     /**
      * 根据所传的套餐id删除关联的菜品和套餐

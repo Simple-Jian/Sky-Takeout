@@ -111,8 +111,8 @@ public class DishServiceImpl implements DishService {
         dishFlavorMapper.deleteByDishIds(id2);
         //批量删除对应的套餐
         //1.查询对应的套餐
-        List<Long> list=setmealDishMapper.getIds(id2);
-        HashSet<Long> list1=new HashSet<>(list); //去重
+        HashSet<Long> list1=setmealDishMapper.getIds(id2);
+//        HashSet<Long> list1=new HashSet<>(list); //去重
         System.out.println(list1);
         //首先判断是否查出了数据
         if(!list1.isEmpty()){ //2.删除对应的套餐
