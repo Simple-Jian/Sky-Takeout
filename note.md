@@ -277,6 +277,77 @@ public class RedisConfig {
           httpClient.close();
       }
 
+#使用Redis缓存菜品
+  思路:
+  开始--(查询菜品)->后端服务--(检查缓存是否存在)--(No)-->读取数据库-->判断是否添加缓存
+                                 |
+                                 --(Yes)-->读取缓存
 
+  逻辑:每个分类的菜品保存一份缓存数据
+      数据库中菜品数据有变更时清理缓存数据
+
+
+#Spring Cache
+   Spring Cache是一个框架,实现了基于注解的缓存功能,只需要简单地加一个注解,就能实现缓存功能,
+   Spring Cache提供了一层抽象,底层可以切换不同的缓存实现,例如EHCache,Caffeine,Redis,
+   换言之,这套注解对不同的缓存实现产品是通用的
+
+  1.常用注解
+  @EnableCaching 开启缓存注解功能,通常加在启动类上
+  @Cacheable   在方法执行前先查询缓存中是否有数据,如果有数据,则直接返回缓存数据,如果没有缓存
+  数据,调用方法将方法返回值放到缓存中
+  @CachePut 将方法产生的返回值放到缓存中
+  @CacheEvict  将一条或多条数据从缓存中删除
+
+  2. 使用步骤:
+  a.导入spring cache和Redis相关的maven坐标
+   <!--spring data redis依赖-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <!--spring cache的依赖-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+  b.在启动类上加入@EnableCaching注解...
+
+  3.SpEL(Spring Expression Language),一种spring的表达式语法,可以动态获得数据
+  例如:"#user(形参名字).id" "result(引用方法返回值).name"
+       "#p0/a0.id/#root.args[0].id"(第一个形参的id属性),
+
+    @CachePut(cacheNames ="userCache", key="#user.id")
+      //SpEL(Spring Expression Language)语法,可以动态获取
+      //将方法返回值放到缓存中,key的生成规则是:userCache(缓存名)::xxx(user.id)
+      其中':'表示一层Redis中的一层目录结构
+
+    /**
+         * 使用springCache注解使用缓存查询数据
+         * @param id
+         * @return
+         */
+        @Cacheable(cacheNames = "userCache",key="#id")
+        @GetMapping
+        public User getById(Long id){
+            User user = userMapper.getById(id);
+            return user;
+        }
+
+删除目录下所有:@CacheEvict(cacheNames="userCache" allEntries=true)
+/**
+     * 当数据库中的数据被删除时,相应缓存数据也要被清理
+     * @param id
+     */
+    @CacheEvict(cacheNames = "userCache",key="#Id")
+    @DeleteMapping
+    public void deleteById(Long id){
+        userMapper.deleteById(id);
+    }
+      Spring Cache基于代理技术,程序执行时,会进入该方法的代理对象,如果能查到就直接返回,因此可以
+  即使在方法中加入断点,如果有缓存也能查询成功,因为首先使用的是代理对象,如果没有缓存,才会使用
+  反射调用原方法
+
+  总结:spring cache的使用核心是良好地管理和使用缓存对象的名称
 
 
