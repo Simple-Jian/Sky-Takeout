@@ -64,6 +64,22 @@ public class DishServiceImpl implements DishService {
 
         return dishVOList;
     }
+
+    /**
+     * 根据分类Id查询菜品
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> list(Long categoryId) {
+        //这里使用部分条件查询就可以,封装一个新的dish对象,传入categoryId
+        Dish dish=new Dish();
+        dish.setCategoryId(categoryId);
+        List<Dish> list = dishMapper.list(dish);
+        return list;
+    }
+
+
     /**
      * 新增菜品及其口味数据
      * @param dishDTO

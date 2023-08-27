@@ -1,5 +1,6 @@
 package com.sky.service;
 
+import com.sky.dto.DishDTO;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
@@ -24,4 +25,22 @@ public interface SetmealService {
      */
     List<DishItemVO> getDishItemById(Long id);
 
+    /**
+     * 添加套餐
+     * @param setmealDTO
+     */
+    void save(SetmealDTO setmealDTO);
+
+    /**
+     * 分页条件查询
+     * @param setmealPageQueryDTO
+     */
+    PageResult page(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     * 更改套餐状态
+     * @param status
+     * @param id
+     */
+    void updateStatus(Integer status, Long id);
 }
