@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 import static com.sky.result.Result.success;
-
+//TODO 菜品的停用启用功能未完成
 @Api(tags="菜品管理控制类")
 @Slf4j
 @RestController("adminDishController")

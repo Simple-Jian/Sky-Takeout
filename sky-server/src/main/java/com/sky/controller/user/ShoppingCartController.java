@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.management.relation.RelationSupport;
 import java.util.List;
-
+//TODO 购物车减少商品数量的功能未完成
 /**
  * 购物车控制类
  */

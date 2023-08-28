@@ -350,4 +350,3 @@ public class RedisConfig {
 
   总结:spring cache的使用核心是良好地管理和使用缓存对象的名称
 
-
