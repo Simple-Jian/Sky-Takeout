@@ -57,7 +57,7 @@ public interface DishMapper {
      * @param id
      * @return
      */
-    @Select("select * from dish where id=#{id}")
+    @Select("select d.*,df.* from dish d,dish_flavor df where id=#{id}")
     Dish getById1(Long id);
 
     /**

@@ -14,8 +14,13 @@ import java.util.List;
 
 @Mapper
 public interface SetmealMapper {
-
-
+    /**
+     * 根据套餐id查询套餐
+     * @param id
+     * @return
+     */
+    @Select("select * from setmeal where id=#{id}")
+    Setmeal getById(Long id);
 
     /**
      * 根据分类id查询套餐的数量
