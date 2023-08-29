@@ -350,3 +350,14 @@ public class RedisConfig {
 
   总结:spring cache的使用核心是良好地管理和使用缓存对象的名称
 
+#获取临时域名(内网穿透) cpolar工具,网站成功登录后获取验证authtoken,然后命令行..exe authtoken 复制的token
+
+
+#springtask 工具
+
+
+
+微服务
+不同微服务,不要重复开发相同业务
+微服务数据独立,不要访问其他微服务的数据库
+微服务可以将自己的业务暴露为接口,供其他微服务使用

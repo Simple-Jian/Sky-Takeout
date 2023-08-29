@@ -16,6 +16,13 @@ sky:
   wechat:
     appid: wxe7b01facce571ca4
     secret: d6a4546c80eeafefb85e05bcdd0bf952
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+    privateKeyFilePath:
+    apiV3Key: CZB51236435wxpay435434323FFDuv3
+    weChatPayCertFilePath:
+    notifyUrl: https://334e88e4.r8.cpolar.top/notify/paySuccess
+    refundNotifyUrl: https://334e88e4.r8.cpolar.top/notify/refundSuccess
   #被引用的副配置文件
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
